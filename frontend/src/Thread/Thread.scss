@@ -1,6 +1,7 @@
 @import "../App";
 
 .thread {
+  cursor: pointer;
   width: 1000px;
   border-color: $rich_black;
   border-style: solid;
@@ -10,7 +11,7 @@
   background-color: $wheat;
   -webkit-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
-  box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px -2px 15px -7px rgba(0, 0, 0, 0.75);
 }
 
 #title {
