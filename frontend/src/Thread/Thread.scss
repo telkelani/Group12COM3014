@@ -1,0 +1,27 @@
+@import "../App";
+
+.thread {
+  width: 1000px;
+  border-style: solid;
+  border-color: $rich_black;
+  padding: 20px;
+  margin: 50px;
+  background-color: $test;
+  -webkit-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
+}
+
+#title {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#footer {
+  padding-top: 20px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: left;
+}
