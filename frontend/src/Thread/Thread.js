@@ -9,12 +9,12 @@ const Thread = (props) => {
   };
   return (
     <div className="thread" onClick={handleClick}>
-      <h1 id="title" style={{ color: "white" }}>
+      <h1 id="title">
         {props.title}
         <p className="lead">Posted by Reece Louch</p>
       </h1>
 
-      <p style={{ color: "white" }}>
+      <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus sed
         elit quis pellentesque. Duis ac nisl ante. Etiam ut accumsan mauris.
         Aliquam viverra odio eu gravida placerat. Curabitur lacinia, nisl non
@@ -37,7 +37,7 @@ const Thread = (props) => {
       </p>
 
       <div id="footer">
-        <p style={{ color: "white", fontSize: "20px" }}> 2 comments</p>
+        <p style={{ fontSize: "20px" }}> 2 comments</p>
       </div>
     </div>
   );

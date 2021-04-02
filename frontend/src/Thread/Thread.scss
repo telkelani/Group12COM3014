@@ -2,11 +2,12 @@
 
 .thread {
   width: 1000px;
-  border-style: solid;
   border-color: $rich_black;
+  border-style: solid;
+  border-width: 1px;
   padding: 20px;
   margin: 50px;
-  background-color: $test;
+  background-color: $wheat;
   -webkit-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
   box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
