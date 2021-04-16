@@ -23,7 +23,7 @@ const Register = () => {
               Submit
             </Button>
           </Form>
-          <a href="/login">Login</a>
+          <a href="/login">Want to login?</a>
         </div>
       </Container>
     </div>

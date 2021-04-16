@@ -21,7 +21,7 @@ const Login = () => {
             Submit
           </Button>
         </Form>
-        <a href="/register">Register</a>
+        <a href="/register">Want to register?</a>
       </div>
     </Container>
   );

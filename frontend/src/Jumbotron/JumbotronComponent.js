@@ -10,7 +10,7 @@ const JumbotronComponent = () => {
           Pulse
         </h1>
         <p className="lead" style={{ color: "white" }}>
-          A public message-board to discuss anything
+          A public forum to discuss a wide range of topics.
         </p>
         <hr className="my-2" style={{ color: "white" }} />
         <p className="lead">
