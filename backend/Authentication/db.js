@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const databaseURI = "mongodb://localhost/Group12COM3014";
+const databaseURI =
+  "mongodb+srv://admin:pass@cluster0.j4nfh.mongodb.net/PostDatabase?retryWrites=true&w=majority/PostDatabase";
 mongoose.connect(databaseURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

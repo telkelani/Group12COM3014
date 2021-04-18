@@ -39,7 +39,8 @@ app.use(
   session({
     secret: "foo",
     store: MongoStore.create({
-      mongoUrl: "mongodb://localhost/Group12COM3014",
+      mongoUrl:
+        "mongodb+srv://admin:pass@cluster0.j4nfh.mongodb.net/PostDatabase?retryWrites=true&w=majority",
     }),
     resave: false,
     saveUninitialized: false,
@@ -48,7 +49,8 @@ app.use(
 );
 
 const MongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017";
+const url =
+  "mongodb+srv://admin:pass@cluster0.j4nfh.mongodb.net/PostDatabase?retryWrites=true&w=majority";
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -129,7 +131,7 @@ app.post("/isLoggedIn", (req, res) => {
   //Check if a session with that ID exists in the database of sessions
   MongoClient.connect(url, (err, client) => {
     console.log("Connected successfully to server");
-    const db = client.db("Group12COM3014");
+    const db = client.db("PostDatabase");
     const collection = db.collection("sessions");
 
     collection.find({ _id: sessionId }).toArray(async (err, docs) => {
