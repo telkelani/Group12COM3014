@@ -4,10 +4,10 @@
 **The custom input is in bold**
 - cd ./backend/Post
 - docker build -t **image_name** .
-- docker run -p **portyouwant**:4000 -d _image_name_ --name=**name_your_container**
+- docker run -p **portyouwant**:4000 -d **image_name** --name=**name_your_container**
 
 - To check if container is running
-docker ps
+- docker ps
 
 ## SCHEMA (FIELDS)
 ##### title: String (required)
@@ -16,7 +16,7 @@ docker ps
 ##### createdAt: Date
 
 (These examples picked 4000 as the port. Replace this with the port you are using)
-##GET REQUESTS (GET)
+## GET REQUESTS (GET)
 
 #### GET POSTS
 `http://localhost:<port_you_want>/posts/api/all`
