@@ -2,9 +2,9 @@
 
 ##SETUP server  
 **The custom input is in bold**
-cd ./backend/Posts
-docker build -t _image_name_ .
-docker run -p **portyouwant**:4000 -d _image_name_ --name=**name_your_container**
+- cd ./backend/Post
+- docker build -t **image_name** .
+- docker run -p **portyouwant**:4000 -d _image_name_ --name=**name_your_container**
 
 - To check if container is running
 docker ps
