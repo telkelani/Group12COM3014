@@ -31,8 +31,8 @@ const Register = () => {
 
     axios
       .post(loginServiceDetails + "/register", {
-        firstName: data.forename,
-        lastName: data.surname,
+        firstName: data.firstName,
+        lastName: data.lastName,
         email: data.email,
         password: data.password,
         dateOfBirth: data.dateOfBirth,

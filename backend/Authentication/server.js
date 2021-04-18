@@ -1,11 +1,54 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const port = 3000;
-const app = express();
+const cors = require("cors");
+// const cookieParser = require("cookie-parser");
+const port = 4000;
 const bcrypt = require("bcrypt");
 const User = require("./db.js");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const app = express();
+const _ = require("lodash");
+// app.use(cors());
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+
+  // Request methods you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+
+  // Request headers you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
+  // Pass to next layer of middleware
+  next();
+});
 app.use(express.urlencoded());
 app.use(express.json());
+// app.use(cookieParser());
+app.use(
+  session({
+    secret: "foo",
+    store: MongoStore.create({
+      mongoUrl: "mongodb://localhost/Group12COM3014",
+    }),
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true },
+  })
+);
+
+const MongoClient = require("mongodb").MongoClient;
+const url = "mongodb://localhost:27017";
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -14,6 +57,8 @@ app.get("/", (req, res) => {
 app.post("/register", async (req, res) => {
   //Extract user details from request body
   let { firstName, lastName, email, password, dateOfBirth } = req.body;
+
+  console.log(firstName, lastName, email, password, dateOfBirth);
 
   //If email already exists don't let the account be created
   const emailExists = await User.find({ email: email });
@@ -46,6 +91,7 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
+  console.log("HI");
   //Extract email and password from request body
   let { email, password } = req.body;
 
@@ -63,12 +109,55 @@ app.post("/login", async (req, res) => {
         .send({ error: "The password you have entered is incorrect." });
     }
 
-    return res.sendStatus(200);
-
     //Do session stuff here
+    req.session.userId = user[0].id;
+    return res.sendStatus(200);
   });
 });
 
+app.post("/isLoggedIn", (req, res) => {
+  console.log(req);
+  //Return unauthorized if cookie not included in header
+  if (!req.headers.cookie) {
+    return res.status(401).send({ error: "Cookie not sent with request" });
+  }
+
+  //Extract session ID from the cookie in the header
+  let sessionId = req.headers.cookie.split("=")[1].split(".")[0];
+  sessionId = sessionId.substring(4, sessionId.length);
+
+  //Check if a session with that ID exists in the database of sessions
+  MongoClient.connect(url, (err, client) => {
+    console.log("Connected successfully to server");
+    const db = client.db("Group12COM3014");
+    const collection = db.collection("sessions");
+
+    collection.find({ _id: sessionId }).toArray(async (err, docs) => {
+      console.log(docs);
+      if (docs.length === 0) {
+        return res.status(401).send({ error: "Session not found" });
+      }
+      if (docs[0]._id === sessionId) {
+        const userId = req.session.userId;
+        const user = await User.findById(userId).exec();
+        return res.status(200).send({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          dateOfBirth: user.dateOfBirth,
+        });
+      }
+      return res.status(401).send({ error: "Session not found" });
+    });
+  });
+});
+
+app.post("/logout", (req, res) => {
+  console.log("hi");
+  req.session.destroy();
+  return res.sendStatus(200);
+});
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server listening at http://localhost:${port}`);
 });

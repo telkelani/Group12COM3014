@@ -28,22 +28,25 @@ const Login = () => {
     validateFields();
 
     axios
-      .post(loginServiceDetails + "/login", {
-        email: data.email,
-        password: data.password,
-      })
+      .post(
+        loginServiceDetails + "/login",
+        {
+          email: data.email,
+          password: data.password,
+        },
+        { withCredentials: true }
+      )
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
           if (response.data.error) {
             return setError(response.data.error);
           }
+          console.log(response);
 
           setError("");
           history.push("/");
           history.go();
-        } else {
-          setError(response.data.error);
         }
       })
       .catch((error) => {

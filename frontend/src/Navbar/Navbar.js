@@ -1,8 +1,48 @@
 import React from "react";
 import "./Navbar.scss";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import userEvent from "@testing-library/user-event";
+import { useHistory } from "react-router-dom";
 
-const NavbarComponent = () => {
+const axios = require("axios");
+const loginServiceDetails = "http://localhost:4000";
+
+const NavbarComponent = (props) => {
+  const handleLogout = () => {
+    axios.defaults.withCredentials = true;
+    axios
+      .post(loginServiceDetails + "/logout")
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const LoginStatus = () => {
+    if (props.user === false) {
+      return (
+        <Form inline>
+          <Button variant="outline-info" href="/login">
+            Login
+          </Button>
+        </Form>
+      );
+    }
+    return (
+      <Form inline>
+        <Button variant="outline-info" href="/">
+          {props.user.firstName + " " + props.user.lastName}
+        </Button>
+        <Button variant="outline-info" onClick={handleLogout}>
+          Logout
+        </Button>
+      </Form>
+    );
+  };
   return (
     <div>
       <Navbar bg="navbar" variant="dark">
@@ -12,11 +52,7 @@ const NavbarComponent = () => {
           <Nav.Link href="#features">Features</Nav.Link>
           <Nav.Link href="#pricing">Pricing</Nav.Link> */}
         </Nav>
-        <Form inline>
-          <Button variant="outline-info" href="/login">
-            Login
-          </Button>
-        </Form>
+        <LoginStatus />
       </Navbar>
     </div>
   );
