@@ -1,6 +1,6 @@
 # How to use Posts API
 
-##SETUP server  
+## SETUP server  
 **The custom input is in bold**
 - cd ./backend/Post
 - docker build -t **image_name** .
