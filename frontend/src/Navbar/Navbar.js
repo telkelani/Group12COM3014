@@ -16,6 +16,7 @@ const NavbarComponent = (props) => {
         console.log(response);
         if (response.status === 200) {
           window.location.reload();
+          window.location.href = "/"
         }
       })
       .catch((error) => {
