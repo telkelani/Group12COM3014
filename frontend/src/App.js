@@ -3,6 +3,7 @@ import Navbar from "./Navbar/Navbar";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+import {NewThread} from "./Thread/NewThread"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
@@ -20,9 +21,10 @@ function App() {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          let { firstName, lastName, email, dateOfBirth } = response.data;
-          console.log(response);
+          let { userId, firstName, lastName, email, dateOfBirth } = response.data;
+          console.log(response.data);
           setUser((user) => ({
+            userId: userId,
             firstName: firstName,
             lastName: lastName,
             email: email,
@@ -41,6 +43,10 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+
+        <Route exact  path="/newpost">
+          <NewThread user={user}/>
         </Route>
 
         <Route exact path="/login">

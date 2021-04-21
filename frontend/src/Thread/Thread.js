@@ -27,7 +27,7 @@ const Thread = (props) => {
     <div className="thread" onClick={handleClick}>
       <h1 id="title">
         {props.title}
-        <p className="lead">Posted by {props.user}</p>
+        <p className="lead">Posted by {props.user.firstName+" "+props.user.lastName}</p>
       </h1>
 
       <p>{props.body}</p>
