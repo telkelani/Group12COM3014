@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const Post = require("../models/Post");
+const User = require("../../Authentication/db")
 
 //GET POST BY TITLE (Must type search?title=)
 
@@ -63,7 +64,7 @@ router.get("/:id", async (request, response) => {
 //GET POST BY USER
 router.get("/user/:userid", async (request, response) => {
   try {
-    const PostsbyUser = await Post.find({ user: request.params.userid });
+    const PostsbyUser = await Post.findOne({ user: request.params.userid })
     response.json(PostsbyUser);
   } catch (err) {
     response.json({ message: err });
@@ -83,17 +84,25 @@ router.delete("/:id", async (request, response) => {
 //SUBMIT POST
 router.post("/newpost", async (request, response) => {
   const submittedPost = request.body;
-  const now = new Date();
-  const newPost = new Post({
-    title: submittedPost.title,
-    post: submittedPost.post,
-    user: submittedPost.user,
-    createdAt: now,
-  });
 
   try {
-    const savedPost = await newPost.save();
-    response.json(savedPost);
+    const foundUser = await User.findById(submittedPost.user)
+    const now = new Date();
+    if (foundUser) {
+      const newPost = new Post({
+        title: submittedPost.title,
+        post: submittedPost.post,
+        user: foundUser,
+        createdAt: now,
+      });
+      const savedPost = await newPost.save();
+      response.json(savedPost);
+
+    }
+    else {
+      response.status(404).send("User not found")
+    }
+
   } catch (err) {
     response.json({ error_message: err });
   }
