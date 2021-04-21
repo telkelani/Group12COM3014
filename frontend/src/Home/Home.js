@@ -1,15 +1,27 @@
 import "./Home.scss";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import JumboTronComponent from "../Jumbotron/JumbotronComponent";
 import Thread from "../Thread/Thread";
 
+const axios = require("axios");
+const postsServiceUrl = "http://localhost:4001";
+
 const Home = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    axios.get(postsServiceUrl + "/posts/api/all").then((response) => {
+      response.data.forEach((post) => {
+        setPosts((posts) => [...posts, post]);
+        console.log(post.user);
+      });
+      console.log(posts);
+    });
+  }, []);
   const ListNames = () => {
-    const names = ["Thread 1", "Thread 2", "Thread 3", "Thread 4"];
-    const listNames = names.map((name) => {
+    const listNames = posts.map((post) => {
       return (
-        <li key={name}>
-          <Thread title={name} body={name} />
+        <li key={post._id}>
+          <Thread title={post.title} body={post.post} user={post.user} />
         </li>
       );
     });

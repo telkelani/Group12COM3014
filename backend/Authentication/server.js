@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 // const cookieParser = require("cookie-parser");
-const port = 4000;
+const port = process.env.PORT || 4000;
 const bcrypt = require("bcrypt");
 const User = require("./db.js");
 const session = require("express-session");
