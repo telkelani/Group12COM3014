@@ -3,3 +3,8 @@
   background-color: $test !important;
   border-radius: 0px !important;
 }
+
+.animate__animated.animate__pulse {
+  --animate-duration: 0.4s;
+  -webkit-animation-iteration-count: infinite;
+}

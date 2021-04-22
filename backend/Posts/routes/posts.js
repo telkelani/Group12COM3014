@@ -2,8 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 const Post = require("../models/Post");
+const User = require("../../Authentication/db")
 
-//GET POST BY TITLE (Must type search?title=)
+//ENABLE CORS
+
+
 
 //GET ALL POSTS
 router.get("/all", async (request, response) => {
@@ -63,7 +66,7 @@ router.get("/:id", async (request, response) => {
 //GET POST BY USER
 router.get("/user/:userid", async (request, response) => {
   try {
-    const PostsbyUser = await Post.find({ user: request.params.userid });
+    const PostsbyUser = await Post.findOne({ "user.user_id":  request.params.userid} )
     response.json(PostsbyUser);
   } catch (err) {
     response.json({ message: err });
@@ -83,17 +86,31 @@ router.delete("/:id", async (request, response) => {
 //SUBMIT POST
 router.post("/newpost", async (request, response) => {
   const submittedPost = request.body;
-  const now = new Date();
-  const newPost = new Post({
-    title: submittedPost.title,
-    post: submittedPost.post,
-    user: submittedPost.user,
-    createdAt: now,
-  });
-
   try {
-    const savedPost = await newPost.save();
-    response.json(savedPost);
+    //Locate user first
+    const foundUser = await User.findById(submittedPost.user.userId, '_id firstName lastName')
+    const now = new Date();
+    //If found user, submit 
+    if (foundUser) {
+      const newPost = new Post({
+        title: submittedPost.title,
+        post: submittedPost.post,
+        user: {
+          user_id: foundUser._id,
+          firstName: foundUser.firstName,
+          lastName: foundUser.lastName
+        },
+        createdAt: now,
+      });
+      const savedPost = await newPost.save();
+      response.json(savedPost);
+
+    }
+    //If not return user not found
+    else {
+      response.status(404).send("User not found")
+    }
+
   } catch (err) {
     response.json({ error_message: err });
   }

@@ -143,6 +143,7 @@ app.post("/isLoggedIn", (req, res) => {
         const userId = req.session.userId;
         const user = await User.findById(userId).exec();
         return res.status(200).send({
+          userId: user._id,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,

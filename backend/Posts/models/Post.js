@@ -12,7 +12,16 @@ const postSchema = Schema({
         required: true
     }, 
     user: {
-        type: String
+        user_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        firstName: {
+            type: String,
+        },
+        lastName: {
+            type: String
+        }
     },
     createdAt: {
         type: Date
