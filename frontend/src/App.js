@@ -3,6 +3,7 @@ import Navbar from "./Navbar/Navbar";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+import Chat from "./Chat/Chat";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
@@ -49,6 +50,10 @@ function App() {
 
         <Route exact path="/register">
           <Register />
+        </Route>
+
+        <Route exact path="/chat">
+          <Chat />
         </Route>
       </Switch>
     </Router>

@@ -12,6 +12,7 @@ const Home = () => {
     axios.get(postsServiceUrl + "/posts/api/all").then((response) => {
       response.data.forEach((post) => {
         setPosts((posts) => [...posts, post]);
+        console.log("Hi");
         console.log(post.user);
       });
       console.log(posts);
