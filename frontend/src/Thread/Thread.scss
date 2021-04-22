@@ -29,21 +29,23 @@
 }
 
 .newpost-alert {
-  margin: 0% 25%
+  margin: 0% 25%;
 }
 
 .newpost-padding {
   margin: 5% 25%;
-  background-color: #FFB301;
+  background-color: $wheat;
   border-radius: 25px 25px 25px 25px;
   padding: 5% 10%;
-
+  border-style: solid;
+  border-width: 1px;
+  -webkit-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px -2px 39px -7px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px -2px 15px -7px rgba(0, 0, 0, 0.75);
 }
 
-
-.newpost-input{
+.newpost-input {
   background-color: #090909 !important;
   border-color: #090909 !important;
-  color: #dac8c8 !important
+  color: #dac8c8 !important;
 }
-
