@@ -27,13 +27,9 @@ const Thread = (props) => {
     <div className="thread" onClick={handleClick}>
       <h1 id="title">
         {props.title}
-<<<<<<< HEAD
         <p className="lead">
-          {/* Posted by {props.user.firstName + " " + props.user.lastName} */}
+          Posted by {props.user.firstName + " " + props.user.lastName}
         </p>
-=======
-        <p className="lead">Posted by {props.user.firstName+" "+props.user.lastName}</p>
->>>>>>> 8c431e111231a4e53a81af3021dc5343bc35cfa0
       </h1>
 
       <p>{props.body}</p>
