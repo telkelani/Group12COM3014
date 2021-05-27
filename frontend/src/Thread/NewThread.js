@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
@@ -45,6 +45,12 @@ export function NewThread({ user }) {
         history.go();
       });
   };
+
+  useEffect(() => {
+    if (user === undefined) {
+      return history.replace("/unauthorized");
+    }
+  }, [user]);
 
   return (
     <div>

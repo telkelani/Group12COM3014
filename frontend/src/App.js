@@ -7,13 +7,15 @@ import { NewThread } from "./Thread/NewThread";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
+import Profile from "./Profile/Profile";
+import Unauthorized from "./Unauthorized/Unauthorized";
 import Chat from "./Chat/Chat";
 
 const axios = require("axios");
 const loginServiceDetails = "http://localhost:4000";
 
 function App() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
@@ -22,13 +24,9 @@ function App() {
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
-          let {
-            userId,
-            firstName,
-            lastName,
-            email,
-            dateOfBirth,
-          } = response.data;
+          let { userId, firstName, lastName, email, dateOfBirth } =
+            response.data;
+          console.log("CHECKING");
           console.log(response.data);
           setUser((user) => ({
             userId: userId,
@@ -64,8 +62,16 @@ function App() {
           <Register />
         </Route>
 
+        <Route exact path="/profile">
+          <Profile />
+        </Route>
+
         <Route exact path="/chat">
-          <Chat />
+          {user === {} ? <h1>hi</h1> : null}
+        </Route>
+
+        <Route exact path="/unauthorized">
+          <Unauthorized></Unauthorized>
         </Route>
       </Switch>
     </Router>
