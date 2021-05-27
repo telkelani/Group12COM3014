@@ -15,7 +15,7 @@ const axios = require("axios");
 const loginServiceDetails = "http://localhost:4000";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(false);
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
@@ -28,13 +28,13 @@ function App() {
             response.data;
           console.log("CHECKING");
           console.log(response.data);
-          setUser((user) => ({
+          setUser({
             userId: userId,
             firstName: firstName,
             lastName: lastName,
             email: email,
             dateOfBirth: dateOfBirth,
-          }));
+          });
         }
       })
       .catch((error) => {
@@ -51,7 +51,7 @@ function App() {
         </Route>
 
         <Route exact path="/newpost">
-          <NewThread user={user} />
+          {user === false ? <Unauthorized /> : <NewThread user={user} />}
         </Route>
 
         <Route exact path="/login">

@@ -22,7 +22,7 @@ const AlertForm = ({ error }) => {
   );
 };
 
-export function NewThread({ user }) {
+export function NewThread(props) {
   const history = useHistory();
   const {
     register,
@@ -32,7 +32,7 @@ export function NewThread({ user }) {
   const submitFunction = (data) => {
     const title = data.title;
     const post = data.post;
-    const currentUser = user;
+    const currentUser = props.user;
     axios
       .post("http://localhost:4001/posts/api/newpost", {
         title: title,
@@ -47,10 +47,12 @@ export function NewThread({ user }) {
   };
 
   useEffect(() => {
-    if (user === undefined) {
-      return history.replace("/unauthorized");
+    console.log("PROPS");
+    console.log(props.user);
+    if (props.user === false) {
+      // return history.replace("/unauthorized");
     }
-  }, [user]);
+  }, [props]);
 
   return (
     <div>

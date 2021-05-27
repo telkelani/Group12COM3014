@@ -24,7 +24,7 @@ const NavbarComponent = (props) => {
       });
   };
   const LoginStatus = () => {
-    if (props.user === undefined) {
+    if (props.user === false) {
       return (
         <Form inline>
           <Nav.Link href="/login" style={{ color: "white" }}>
