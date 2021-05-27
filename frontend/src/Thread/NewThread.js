@@ -45,17 +45,10 @@ export function NewThread(props) {
         history.go();
       });
   };
-
-  useEffect(() => {
-    console.log("PROPS");
-    console.log(props.user);
-    if (props.user === false) {
-      // return history.replace("/unauthorized");
-    }
-  }, [props]);
-
+  
   return (
     <div>
+      
       {errors.title && <AlertForm error={errors.title} />}
       {errors.post && <AlertForm error={errors.post} />}
 

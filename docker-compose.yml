@@ -1,0 +1,47 @@
+version: '3' #Docker compose version is important to specify (if not, then docker will be dependent on updates. Docker should be independent of updates)
+
+#services: The services specified 
+#   my-service:
+#       build:
+#           context: the relevant files of the service
+#           dockerfile: should be pointing to the dockerfile of the service (contains config about the environment service was developed on)
+#       ports:
+#          - port_you_want_to_expose_on_client:port_defined_by_dockerfile
+
+services:
+    frontend-service:  
+        build:
+            context: './frontend'
+            dockerfile: 'Dockerfile'
+        ports:
+          - 3000:3000
+    
+    authentication-service:
+        build:
+            context: './backend/Authentication'
+            dockerfile: Dockerfile
+        ports:
+          - 4000:4000
+    posts-service:
+        build:
+            context: './backend/Posts'
+            dockerfile: Dockerfile
+        ports:
+          - 4001:4001
+
+    chat-service:
+        build:
+            context: './backend/Chat'
+            dockerfile: Dockerfile
+        ports:
+          - 4002:4002
+    
+    comments-service:
+        build:
+            context: './backend/Comments'
+            dockerfile: Dockerfile
+        ports:
+          - 4003:4003
+    
+    
+    
