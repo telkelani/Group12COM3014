@@ -9,6 +9,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 7000
+EXPOSE 4003
 
 CMD [ "node", "commentsServer.js" ]

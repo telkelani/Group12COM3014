@@ -2,7 +2,7 @@ import React from "react";
 import "./Thread.scss";
 
 const Thread = (props) => {
-  const { title, post, user } = props;
+  
 
   const handleThumbsUpClick = (e) => {
     console.log("Thumbs up pressed!");
@@ -23,13 +23,22 @@ const Thread = (props) => {
     console.log("bye");
   };
 
+  //Display time on post
+  const displayTimePosted = (time) => {
+    const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone //Gets client timezone
+    const localeString = new Date(time).toLocaleString({timeZone: clientTimeZone})
+    
+    return localeString
+  }
   return (
     <div className="thread" onClick={handleClick}>
       <h1 id="title">
         {props.title}
         <p className="lead">
-          Posted by {props.user.firstName + " " + props.user.lastName}
+          Posted by {props.user.firstName + " " + props.user.lastName } <br />
+          Created At {displayTimePosted(props.createdAt)}
         </p>
+
       </h1>
 
       <p>{props.body}</p>

@@ -11,7 +11,8 @@ const Home = () => {
   useEffect(() => {
     axios.get(postsServiceUrl + "/posts/api/all").then((response) => {
       response.data.forEach((post) => {
-        setPosts((posts) => [...posts, post]);
+        setPosts((posts) => [...posts, post].reverse())
+        //Reverses them so the recently added one comes up first
         console.log(post.user);
       });
       console.log(posts);
@@ -21,7 +22,7 @@ const Home = () => {
     const listNames = posts.map((post) => {
       return (
         <li key={post._id}>
-          <Thread title={post.title} body={post.post} user={post.user} />
+          <Thread title={post.title} body={post.post} user={post.user} createdAt={post.createdAt} />
         </li>
       );
     });
