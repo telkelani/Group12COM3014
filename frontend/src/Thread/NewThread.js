@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
@@ -22,7 +22,7 @@ const AlertForm = ({ error }) => {
   );
 };
 
-export function NewThread({ user }) {
+export function NewThread(props) {
   const history = useHistory();
   const {
     register,
@@ -32,7 +32,7 @@ export function NewThread({ user }) {
   const submitFunction = (data) => {
     const title = data.title;
     const post = data.post;
-    const currentUser = user;
+    const currentUser = props.user;
     axios
       .post("http://localhost:4001/posts/api/newpost", {
         title: title,
@@ -45,6 +45,14 @@ export function NewThread({ user }) {
         history.go();
       });
   };
+
+  useEffect(() => {
+    console.log("PROPS");
+    console.log(props.user);
+    if (props.user === false) {
+      // return history.replace("/unauthorized");
+    }
+  }, [props]);
 
   return (
     <div>

@@ -24,7 +24,8 @@ const Login = () => {
     console.log(data);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     validateFields();
 
     axios
@@ -71,10 +72,11 @@ const Login = () => {
       <div id="loginform">
         <DisplayError />
         <h2 className="text-center">Login</h2>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control
+              required
               type="email"
               placeholder="Enter email"
               id="email"
@@ -85,15 +87,14 @@ const Login = () => {
           <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
+              required
               type="password"
               placeholder="Password"
               id="password"
               onChange={handleChange}
             />
           </Form.Group>
-          <Button variant="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </Form>
         <a href="/register">Want to register?</a>
       </div>
