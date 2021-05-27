@@ -16,7 +16,7 @@ const NavbarComponent = (props) => {
         console.log(response);
         if (response.status === 200) {
           window.location.reload();
-          window.location.href = "/"
+          window.location.href = "/";
         }
       })
       .catch((error) => {
@@ -27,23 +27,28 @@ const NavbarComponent = (props) => {
     if (props.user === false) {
       return (
         <Form inline>
-          <Button variant="outline-info" href="/login">
+          <Nav.Link href="/login" style={{ color: "white" }}>
             Login
-          </Button>
+          </Nav.Link>
         </Form>
       );
     }
+
     return (
       <Form inline>
-        <Button variant="outline-info" href="/">
+        <Nav.Link href="/" style={{ color: "white" }}>
           {props.user.firstName + " " + props.user.lastName}
-        </Button>
-        <Button variant="outline-info" onClick={handleLogout}>
+        </Nav.Link>
+        <Nav.Link href="/chat" style={{ color: "white" }}>
+          Chats
+        </Nav.Link>
+        <Nav.Link onClick={handleLogout} style={{ color: "white" }}>
           Logout
-        </Button>
+        </Nav.Link>
       </Form>
     );
   };
+
   return (
     <div>
       <Navbar bg="navbar" variant="dark">
