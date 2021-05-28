@@ -4,11 +4,10 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-
 RUN npm install
 
 COPY . .
 
-EXPOSE 4000
+EXPOSE 4001
 
-CMD [ "node", "postsServer.js" ]
+CMD [ "npm", "start" ]

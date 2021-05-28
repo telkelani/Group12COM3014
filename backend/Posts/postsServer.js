@@ -2,14 +2,14 @@ const express = require("express");
 const app = express();
 const db = require("./db/db.js");
 
-const PORT = 4001;
+const PORT = process.env.PORT || 4001;
 const postsRoute = require("./routes/posts");
 const cors = require('cors')
 
 //These two lines are needed to interpret response in JSON
 
 
-app.use(express.json());
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //This is going to be the default endpoint, postsRoute handles all the routes

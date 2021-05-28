@@ -4,7 +4,7 @@
   "description": "\"POSTS API BACKEND\"",
   "main": "postsServer.js",
   "scripts": {
-    "start": "nodemon postsServer.js",
+    "start": "nodemon -L --inspect=0.0.0.0 postsServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

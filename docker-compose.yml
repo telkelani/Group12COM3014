@@ -15,19 +15,30 @@ services:
             dockerfile: 'Dockerfile'
         ports:
           - 3000:3000
-    
+        volumes: # When containers restart they lose their data. Volumes allow for persistent data
+          - C:\Users\tarek\OneDrive - University of Surrey\Year 3\postsapi_te00141\frontend\src:/app/src
+        environment: #An environment variable I need to declare because I coded this in Windows. This allows the react server to automatically update code with changes
+          - CHOKIDAR_USEPOLLING=true
+       
     authentication-service:
         build:
             context: './backend/Authentication'
             dockerfile: Dockerfile
         ports:
           - 4000:4000
+        volumes:
+          - ./backend/Authentication:/usr/src/app
+          - /usr/src/app/node_modules #Put node modules so nodemon works
+
     posts-service:
         build:
             context: './backend/Posts'
             dockerfile: Dockerfile
         ports:
           - 4001:4001
+        volumes:
+          - ./backend/Posts:/usr/src/app
+          - /usr/src/app/node_modules
 
     chat-service:
         build:
@@ -35,13 +46,19 @@ services:
             dockerfile: Dockerfile
         ports:
           - 4002:4002
-    
+        volumes:
+          - ./backend/Chat:/usr/src/app
+          - /usr/src/app/node_modules
+
     comments-service:
         build:
             context: './backend/Comments'
             dockerfile: Dockerfile
         ports:
           - 4003:4003
+        volumes:
+          - ./backend/Comments:/usr/src/app
+          - /usr/src/app/node_modules
     
     
     

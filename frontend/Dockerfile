@@ -12,6 +12,7 @@ COPY package-lock.json ./
 
 RUN npm install
 
+
 # add app
 COPY . ./
 

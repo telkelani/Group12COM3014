@@ -2,9 +2,9 @@
   "name": "comments",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "commentsServer.js",
   "scripts": {
-    "start": "nodemon commentsServer.js"
+    "start": "nodemon -L --inspect=0.0.0.0 commentsServer.js"
   },
   "keywords": [],
   "author": "",

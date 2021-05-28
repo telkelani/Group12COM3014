@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 4002
 
-CMD [ "node", "server.js" ]
+CMD [ "npm", "start" ]
