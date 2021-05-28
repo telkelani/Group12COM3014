@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 4003
 
-CMD [ "node", "commentsServer.js" ]
+CMD [ "npm", "start" ]

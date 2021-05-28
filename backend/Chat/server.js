@@ -98,4 +98,5 @@ function getUserRooms(socket) {
   }, []);
 }
 
-http.listen(PORT, () => console.log(`Server running and listening on ${PORT}`));
+http.listen(PORT, () => {
+  console.log(`Server running and listening on ${PORT}`)});
