@@ -41,7 +41,7 @@ const Profile = (props) => {
       <Container className="text-center">
         <div className="card">
           <h1 className="display-1">{user.firstName + " " + user.lastName}</h1>
-          <Container style={{ marginLeft: "30vw" }}>
+          <Container style={{ marginLeft: "46%" }}>
             <Avatar />
           </Container>
 
