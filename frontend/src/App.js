@@ -50,6 +50,10 @@ function App() {
           <Home />
         </Route>
 
+        <Route exact path="/user/:userid">
+          <Profile user={user}></Profile>
+        </Route>
+
         <Route exact path="/newpost">
           {user === false ? <Unauthorized /> : <NewThread user={user} />}
         </Route>
@@ -60,10 +64,6 @@ function App() {
 
         <Route exact path="/register">
           <Register />
-        </Route>
-
-        <Route exact path="/profile">
-          <Profile />
         </Route>
 
         <Route exact path="/chat">

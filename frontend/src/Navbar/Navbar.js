@@ -36,7 +36,10 @@ const NavbarComponent = (props) => {
 
     return (
       <Form inline>
-        <Nav.Link href="/" style={{ color: "white" }}>
+        <Nav.Link
+          href={`/user/${props.user.userId}`}
+          style={{ color: "white" }}
+        >
           {props.user.firstName + " " + props.user.lastName}
         </Nav.Link>
         <Nav.Link href="/chat" style={{ color: "white" }}>
