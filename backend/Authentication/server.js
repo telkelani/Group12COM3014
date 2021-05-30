@@ -161,6 +161,19 @@ app.post("/logout", (req, res) => {
   return res.sendStatus(200);
 });
 
+app.get("/user/:userid", async (req, res) => {
+  const userid = req.params.userid;
+  console.log(req.session);
+
+  User.findById(userid, (err, results) => {
+    if (err) {
+      return res.status(500).send({ error: err });
+    }
+    console.log(results);
+    return res.status(200).send({ results });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
