@@ -15,8 +15,8 @@ services:
       dockerfile: "Dockerfile"
     ports:
       - 3000:3000
-      # volumes: # When containers restart they lose their data. Volumes allow for persistent data
-      # - C:\Users\tarek\OneDrive - University of Surrey\Year 3\postsapi_te00141\frontend\src:/app/src
+      volumes: # When containers restart they lose their data. Volumes allow for persistent data
+      - ./frontend/src:/app/src
     environment: #An environment variable I need to declare because I coded this in Windows. This allows the react server to automatically update code with changes
       - CHOKIDAR_USEPOLLING=true
 
