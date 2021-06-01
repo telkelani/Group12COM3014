@@ -10,11 +10,11 @@ const JumbotronComponent = () => {
           style={{ color: "white" }}
           className="animate__animated animate__pulse display-3"
         >
-          HEWWOOOOOOOOO HIIIIIIII
+          Pulse
         </h1>
 
         <p className="lead" style={{ color: "white" }}>
-          A public forum to discuss a wide range of topics.
+          A medical forum to discuss and get advice on health issues.
         </p>
         <hr className="my-2" style={{ color: "white" }} />
         <p className="lead">

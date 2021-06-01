@@ -33,6 +33,7 @@ export function NewThread(props) {
     const title = data.title;
     const post = data.post;
     const currentUser = props.user;
+    console.log(title, post, currentUser);
     axios
       .post("http://localhost:4001/posts/api/newpost", {
         title: title,
@@ -45,10 +46,9 @@ export function NewThread(props) {
         history.go();
       });
   };
-  
+
   return (
     <div>
-      
       {errors.title && <AlertForm error={errors.title} />}
       {errors.post && <AlertForm error={errors.post} />}
 

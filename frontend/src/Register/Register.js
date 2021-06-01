@@ -43,10 +43,11 @@ const Register = () => {
           if (response.data.error) {
             return setError(response.data.error);
           }
+          console.log("ASDOAUSHDOASDH");
 
           setError("");
           history.push("/login");
-          history.go();
+          return history.go();
         } else {
           setError(response.body.error);
         }

@@ -59,8 +59,6 @@ const rooms = {};
 // });
 
 io.on("connection", (socket) => {
-  let socketName = "";
-
   socket.on("new-user", (name) => {
     console.log(name);
     console.log(name + " has connected");
@@ -68,17 +66,16 @@ io.on("connection", (socket) => {
     // rooms[room].users[socket.id] = username;
     // socket.broadcast.emit("user-connected", username);
     socket.broadcast.emit("user-connected", name);
-    socketName = name;
   });
   socket.on("message", (message) => {
-    console.log(socketName + " has sent the message : " + message.message);
+    console.log(message.name + " has sent the message : " + message.message);
     // socket.broadcast.to(room).emit("chat-message", {
     // 	message: message,
     // 	username: rooms[room].users[socket.id],
     // });
-    socket.broadcast.emit("message", {
-      name: socketName,
-      message: message,
+    io.emit("receiveMessage", {
+      name: message.name,
+      message: message.message,
     });
   });
   // socket.on("disconnect", () => {
@@ -99,4 +96,5 @@ function getUserRooms(socket) {
 }
 
 http.listen(PORT, () => {
-  console.log(`Server running and listening on ${PORT}`)});
+  console.log(`Server running and listening on ${PORT}`);
+});

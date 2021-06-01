@@ -5,8 +5,6 @@ const Post = require("../models/Post");
 
 //ENABLE CORS
 
-
-
 //GET ALL POSTS
 router.get("/all", async (request, response) => {
   try {
@@ -65,7 +63,9 @@ router.get("/:id", async (request, response) => {
 //GET POST BY USER
 router.get("/user/:userid", async (request, response) => {
   try {
-    const PostsbyUser = await Post.findOne({ "user.user_id":  request.params.userid} )
+    const PostsbyUser = await Post.findOne({
+      "user.user_id": request.params.userid,
+    });
     response.json(PostsbyUser);
   } catch (err) {
     response.json({ message: err });
@@ -85,24 +85,25 @@ router.delete("/:id", async (request, response) => {
 //SUBMIT POST
 router.post("/newpost", async (request, response) => {
   const submittedPost = request.body;
-  const currentUser = submittedPost.user
-  
+  const currentUser = submittedPost.user;
+
   try {
     const now = new Date();
     const newPost = new Post({
-        title: submittedPost.title,
-        post: submittedPost.post,
-        user: {
-          user_id: currentUser._id,
-          firstName: currentUser.firstName,
-          lastName: currentUser.lastName
-        },
-        createdAt: now,
-      });
+      title: submittedPost.title,
+      post: submittedPost.post,
+      user: {
+        user_id: currentUser._id,
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+      },
+      createdAt: now,
+    });
     const savedPost = await newPost.save();
     response.json(savedPost);
   } catch (err) {
     response.json({ error_message: err });
+    console.log(err);
   }
 });
 

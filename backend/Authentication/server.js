@@ -118,14 +118,15 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/isLoggedIn", (req, res) => {
-  console.log(req);
   //Return unauthorized if cookie not included in header
   if (!req.headers.cookie) {
     return res.status(401).send({ error: "Cookie not sent with request" });
   }
 
   //Extract session ID from the cookie in the header
-  let sessionId = req.headers.cookie.split("=")[1].split(".")[0];
+  let sessionId = req.headers.cookie.split("connect.sid=")[1].split(".")[0];
+  console.log(sessionId);
+  console.log("SESSION ID");
   sessionId = sessionId.substring(4, sessionId.length);
 
   //Check if a session with that ID exists in the database of sessions
