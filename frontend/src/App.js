@@ -58,16 +58,15 @@ function App() {
           {user === false ? <Unauthorized /> : <NewThread user={user} />}
         </Route>
 
+        <Route exact path="/chat">
+          {user === false ? <Unauthorized /> : <Chat user={user}></Chat>}
+        </Route>
         <Route exact path="/login">
           <Login />
         </Route>
 
         <Route exact path="/register">
           <Register />
-        </Route>
-
-        <Route exact path="/chat">
-          {user === {} ? <h1>hi</h1> : null}
         </Route>
 
         <Route exact path="/unauthorized">

@@ -2,6 +2,7 @@ import "./Home.scss";
 import React, { useEffect, useState } from "react";
 import JumboTronComponent from "../Jumbotron/JumbotronComponent";
 import Thread from "../Thread/Thread";
+import CookieConsent from "react-cookie-consent";
 
 const axios = require("axios");
 const postsServiceUrl = "http://localhost:4001";
@@ -11,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     axios.get(postsServiceUrl + "/posts/api/all").then((response) => {
       response.data.forEach((post) => {
-        setPosts((posts) => [...posts, post].reverse())
+        setPosts((posts) => [...posts, post].reverse());
         //Reverses them so the recently added one comes up first
         console.log(post.user);
       });
@@ -22,7 +23,12 @@ const Home = () => {
     const listNames = posts.map((post) => {
       return (
         <li key={post._id}>
-          <Thread title={post.title} body={post.post} user={post.user} createdAt={post.createdAt} />
+          <Thread
+            title={post.title}
+            body={post.post}
+            user={post.user}
+            createdAt={post.createdAt}
+          />
         </li>
       );
     });
@@ -37,6 +43,10 @@ const Home = () => {
           <ListNames></ListNames>
         </div>
       </div>
+      <CookieConsent>
+        This website uses cookies to enhance the user experience. Please contact
+        rs00857@surrey.ac.uk for actions regarding your account.
+      </CookieConsent>
     </div>
   );
 };

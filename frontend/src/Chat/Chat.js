@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Chat.scss";
 import { Container, Form, Button } from "react-bootstrap";
 const io = require("socket.io-client");
 
 const Chat = (props) => {
-  const socket = io("http://localhost:4002");
+  const socket = useRef();
   const [messages, setMessages] = useState([]);
 
   const [message, setMessage] = useState("");
@@ -18,24 +18,36 @@ const Chat = (props) => {
   const name = props.user.firstName + " " + props.user.lastName;
 
   const handleSend = () => {
-    socket.emit("message", { name: name, message: message });
+    socket.current.emit("message", { name: name, message: message });
   };
 
   useEffect(() => {
+    socket.current = io("http://localhost:4002");
     console.log(props);
     console.log(props.user.firstName + " " + props.user.lastName);
     console.log("PROPS");
     console.log(props);
-    socket.emit("new-user", name);
-    setMessages([
+    socket.current.emit("new-user", name);
+    setMessages((messages) => [
       ...messages,
       {
         name: props.user.firstName + " " + props.user.lastName,
         message: "Connected to the chat",
       },
     ]);
-    socket.on("message", (message) => {
-      setMessages([...messages, message]);
+    socket.current.on("receiveMessage", (message) => {
+      console.log(message);
+      console.log(messages);
+      setMessages((messages) => [...messages, message]);
+    });
+    socket.current.on("user-connected", (name) => {
+      setMessages((messages) => [
+        ...messages,
+        {
+          name: name,
+          message: "Connected to the chat",
+        },
+      ]);
     });
   }, []);
 
