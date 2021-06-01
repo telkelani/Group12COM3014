@@ -10,7 +10,7 @@ const JumbotronComponent = () => {
           style={{ color: "white" }}
           className="animate__animated animate__pulse display-3"
         >
-          HEWWOOOOOOOOO HIIIIIIII
+          Hello
         </h1>
 
         <p className="lead" style={{ color: "white" }}>

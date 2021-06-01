@@ -22,7 +22,7 @@ const Home = () => {
     const listNames = posts.map((post) => {
       return (
         <li key={post._id}>
-          <Thread title={post.title} body={post.post} user={post.user} createdAt={post.createdAt} />
+          <Thread id={post._id} title={post.title} body={post.post} user={post.user} createdAt={post.createdAt} />
         </li>
       );
     });
